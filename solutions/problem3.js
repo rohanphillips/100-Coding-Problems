@@ -1,26 +1,26 @@
 
-const myString = "dvdf";
+const myString = "";
 
 var lengthOfLongestSubstring = function(s) {
   const splitString = s.split('') 
   let found = [];
   let foundList = [];
-  let i;
+
   if (splitString.length === 0){
     return 0;
   }
-  for (i=0; i<splitString.length; i++) {    
-    if (found.includes(splitString[i]) === false){
-      found.push(splitString[i])
-    } else {
-      foundList.push(found.length)
-      found = []
-      found.push(splitString[i])
+  for (let i=0; i<splitString.length; i++) {    
+    found = [];
+    found.push(splitString[i])
+    for (let j=i+1; j<splitString.length; j++) {
+      if (found.includes(splitString[j]) === false){
+        found.push(splitString[j])
+      } else {
+        break;
+      }
     }
-  } 
-  if (found.length > 0){
     foundList.push(found.length)
-  }
+  } 
   return Math.max.apply(Math, foundList);
 };
 // 
