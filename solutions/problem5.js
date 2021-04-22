@@ -1,27 +1,28 @@
 
-const s = "aaaaaa"
+const s = "abba"
 
 var longestPalindrome = function(s) {
-  const splitString = s.split('') 
-  let result;
-
-  if (splitString.length === 0){
-    return 0;
+  let start = 0
+  let end = 0;
+  for (let i = 0; i < 1; i++) {
+    let len1 = expandFromCenter(s, i, i)
+    console.log("L1:", len1)
+    let len2 = expandFromCenter(s, i, i+1)
+    console.log("L2:", len2)
+    let len = Math.max(len1, len2)
+    console.log("len", len)
+    if (len > end - start){
+      start = 
+    }
   }
-  result =splitString[0];
-  console.log("stringLength:", splitString.length / 2);
-  for (let j=0; j < splitString.length / 2 + 2; j++) {
-    const window = j+1;
-    for (let i=0; i<=splitString.length - window; i++) {     
-      let myString = splitString.slice(i, i + window).join("");
-      let mirror = JSON.parse(JSON.stringify(splitString.slice(i, i + window))).reverse().join("");
-      if (myString === mirror){
-        result = myString;
-        console.log("i:", i, " j:", j, "result:", result);
-        break;
-      }
-    } 
-  }  
-  return result;
 };
+
+const expandFromCenter = function(s, l, r){
+  let L = l; let R = r;
+  while(L > 0 && R < s.length && s.charAt(L) === s.charAt(R)){
+    L--; R++;
+  }
+  console.log("expandFromCenter", R - L)
+  return R - L - 1
+}
 console.log("result:", longestPalindrome(s))
