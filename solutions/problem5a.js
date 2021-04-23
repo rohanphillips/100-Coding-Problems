@@ -1,5 +1,5 @@
 
-const s = "ab"
+const s = "cbbd"
 
 const longestPalindrome = function(s) {
   if (s == null || s.length < 1) return "";
@@ -12,9 +12,9 @@ const longestPalindrome = function(s) {
     let len = Math.max(len1, len2);
     console.log("len:", len);
     if (len > end - start) {
-        start = i - (len - 1) / 2;
+        start = parseInt(i - (len - 1) / 2);
         console.log("start:", start)
-        end = i + len / 2;
+        end = parseInt(i + len / 2);
         console.log("end:", end)
     }
   }
