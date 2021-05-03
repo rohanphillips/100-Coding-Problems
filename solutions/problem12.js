@@ -7,7 +7,7 @@ var intToRoman = function(num) {
     const key = table[i];
     const divisor = key[0];
     let int = Math.trunc(num/divisor)
-    num = (num-int*divisor) ;
+    num = num-int*divisor;
     for(let j=0; j<int; j++) {
       result.push(key[1])
     }
