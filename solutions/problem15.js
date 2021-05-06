@@ -1,5 +1,5 @@
 
-const nums = [-1,0,1,2,-1,-4,-2,-3,3,0,4];
+const nums = [1,1,-2];
 var threeSum = function(nums) {
   if(nums.length <= 2) return [] 
   let output = [];
