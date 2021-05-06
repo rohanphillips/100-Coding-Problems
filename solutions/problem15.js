@@ -1,27 +1,25 @@
 
-const nums = [1,1,-2];
+const nums = [0];
 var threeSum = function(nums) {
   if(nums.length <= 2) return [] 
   let output = [];
+  
   let newTriple;
-  const sorted = nums.sort(function(a,b){return a - b})
-  for(let i = 0; i < sorted.length; i++){
-    if(i > 2 && sorted[i] > 0) break;
+  const sorted = nums;
+  for(let i = 0; i < sorted.length - 1; i++){
+    let hash = [];
     for(let j = i + 1; j < sorted.length; j++){
-      if(sorted[i] + sorted[j] > 0) break;
-      for(let k = j + 1; k < sorted.length; k++){
-        if(sorted[i] + sorted[j] + sorted[k] > 0) break;
-        if(i !== j && i !== k && j !== k){
-          newTriple = [];
-          if(sorted[i] + sorted[j] + sorted[k] === 0){
-            newTriple.push(sorted[i]);
-            newTriple.push(sorted[j]);
-            newTriple.push(sorted[k]);
-            if(exists(newTriple.sort(), output) === false){
-              output.push(newTriple);
-            }
-          }
+      let x = 0 - (sorted[i] + sorted[j])
+      if(hash.includes(x)){
+        newTriple = [];
+        newTriple.push(x);
+        newTriple.push(sorted[i]);
+        newTriple.push(sorted[j]);
+        if(exists(newTriple.sort(), output) === false){
+          output.push(newTriple);
         }
+      } else {
+        hash.push(sorted[j]);
       }
     }
   }
