@@ -7,36 +7,39 @@ class Diamond {
     return n > 0 ? firstNumber + diff * (n - 1) : 0;
   }
   makeDiamond(letter) {
-    let result = [];
-    let alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1'
+    // let result = [];
+    let alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1'.split('')
     const space = " ";
     const location = alphabet.indexOf(letter)
     let insideSpaces = this.sequenceNumber(location); //will be decremented by 2
     let outsideSpaces = 0; //will be incremented by 1,
     //As I looked at the pattern, I saw that it would be better to start from the letter location
     //and work backwards
-    console.log("insideSpaces:", insideSpaces)
-    if(location === 0) return letter + "\n"
-    for(let i=location; i >= 0; i--){
+    //create an array with just the letters I want to work with, reversed
+    const processLetters = alphabet.slice(0, location + 1).reverse()
+    //will now use map on the new array, will use index and pass in the new array - we'll need to get it's length
+    const result = processLetters.map(function(letter, index, processLetters){
       const outsideSpace = space.repeat(outsideSpaces);
       const insideSpace = space.repeat(insideSpaces > 0 ? insideSpaces : 0);
-      const currentLetter = alphabet[i]
-      const row = outsideSpace + currentLetter + insideSpace + currentLetter + outsideSpace +"\n"
-      i > 0 ? result.push(row) : result.push(outsideSpace + currentLetter + outsideSpace + "\n");
+      //decide on what the center text will look like
+      const center = index === processLetters.length -1 ? letter : letter + insideSpace + letter
+      //create our row
+      const row = outsideSpace + center + outsideSpace +"\n"
       outsideSpaces ++;
-      insideSpaces -= 2;      
-    }
-    console.log("result:", result)
+      insideSpaces -= 2;  
+      return row
+    })
     //because first element of the result array is only used once, I'll use slice to remove it, that
     //will leave the letter required to create the match
     const mirror = result.slice(1, result.length);
-    console.log("mirror;", mirror)
     //I'm going to reverse the order of result and then append mirror to the end
     //I'll join it here also
     const newResult = result.reverse().concat(mirror).join('');
     return newResult
   }
 }
+const d = new Diamond
+console.log(d.makeDiamond("C"))
 
 //-A-
 //B-B
@@ -62,5 +65,3 @@ class Diamond {
 // ---B-B---
 // ----A----
 
-const d = new Diamond
-console.log(d.makeDiamond("P"))
