@@ -7,7 +7,6 @@ class Diamond {
     return n > 0 ? firstNumber + diff * (n - 1) : 0;
   }
   makeDiamond(letter) {
-    // let result = [];
     let alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1'.split('')
     const space = " ";
     const location = alphabet.indexOf(letter)
@@ -18,7 +17,7 @@ class Diamond {
     //create an array with just the letters I want to work with, reversed
     const processLetters = alphabet.slice(0, location + 1).reverse()
     //will now use map on the new array, will use index and pass in the new array - we'll need to get it's length
-    const result = processLetters.map(function(letter, index, processLetters){
+    const firstHalf = processLetters.map(function(letter, index, processLetters){
       const outsideSpace = space.repeat(outsideSpaces);
       const insideSpace = space.repeat(insideSpaces > 0 ? insideSpaces : 0);
       //decide on what the center text will look like
@@ -29,12 +28,12 @@ class Diamond {
       insideSpaces -= 2;  
       return row
     })
-    //because first element of the result array is only used once, I'll use slice to remove it, that
+    //because first element of the firstHalf array is only used once, I'll use slice to remove it, that
     //will leave the letter required to create the match
-    const mirror = result.slice(1, result.length);
-    //I'm going to reverse the order of result and then append mirror to the end
+    const mirror = firstHalf.slice(1, firstHalf.length);
+    //I'm going to reverse the order of firstHalf and then append mirror to the end
     //I'll join it here also
-    const newResult = result.reverse().concat(mirror).join('');
+    const newResult = firstHalf.reverse().concat(mirror).join('');
     return newResult
   }
 }
